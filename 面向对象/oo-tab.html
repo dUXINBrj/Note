@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<style>
+*{ margin:0; padding:0; list-style:none;}
+
+.tabs{ margin:10px;}
+
+.tabs-nav:before, .tabs-nav:after{ display:table; content:' ';}
+.tabs-nav:after{ width:100%; clear:both; border-bottom:1px solid #47a3da;}
+.tabs-nav li{ position:relative; float:left; margin-right:5px; border:1px solid #becbd2; border-bottom:none;}
+.tabs-nav li.active:after{ position:absolute; bottom:-1px; width:100%; display:block; content:' '; border-bottom:1px solid #fff;}
+.tabs-nav a{ display:block; padding:0 20px; line-height:30px; text-decoration:none; color:#000; font-size:14px;}
+
+.tabs-cnt{ padding:10px;}
+.tabs-content{ display:none;}
+.tabs-content:first-child{ display:block;}	
+</style>
+<body>
+<div class="tabs" id="tabs1">
+    <ul class="tabs-nav">
+        <li class="active"><a href="javascript:;">折扣</a></li>
+        <li><a href="javascript:;">活动</a></li>
+        <li><a href="javascript:;">优惠</a></li>
+        <li><a href="javascript:;">其他</a></li>
+    </ul>
+    <div class="tabs-cnt">
+        <div class="tabs-content">
+            11111111
+        </div>
+        <div class="tabs-content">
+            2222
+        </div>
+        <div class="tabs-content">
+            3333
+        </div>
+        <div class="tabs-content">
+            4444
+        </div>
+    </div>        
+</div>
+</body>
+<script type="text/javascript">
+function tabSwitch(id){
+	var _this=this;
+	this.oTabs=document.getElementById(id);
+	this.tabNav=this.oTabs.querySelectorAll(".tabs-nav li");
+	this.tabCnt=this.oTabs.querySelectorAll(".tabs-content");
+	for (var i=0;i<this.tabNav.length;i++) {
+		this.tabNav[i].index=i;
+		this.tabNav[i].onclick=function(){
+			_this.tab(this);
+		}
+	}
+}
+tabSwitch.prototype.tab=function(oTabNav){
+	for (var i=0;i<this.tabNav.length;i++) {
+		this.tabNav[i].className="";
+		this.tabCnt[i].style.display="none";
+	}
+	oTabNav.className="active";
+	this.tabCnt[oTabNav.index].style.display="block";
+}
+new tabSwitch("tabs1");
+</script>
+</html>

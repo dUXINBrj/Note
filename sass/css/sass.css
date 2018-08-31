@@ -1,0 +1,17 @@
+body {
+  font-size: 12px;
+  background: #f2f2f2; }
+  body p {
+    text-align: center;
+    font-size: 5em;
+    font-weight: bold;
+    font-family: "YaHei"; }
+
+.mydiv :hover {
+  background: red; }
+.mydiv-son {
+  width: 10px;
+  height: 10px;
+  background: blue; }
+
+/*# sourceMappingURL=sass.css.map */

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>事件委托机制</title>
+</head>
+<body>
+	<button id="add">add</button>
+	<ul id="list">
+		<li>item1</li>
+		<li>item2</li>
+		<li>item3</li>
+		<li>item4</li>
+		<li>item5</li>
+	</ul>
+</body>
+<script type="text/javascript">
+window.onload=function () {
+	var oUl=document.getElementById('list');
+	var aLi=document.getElementsByTagName('li');
+	var btn=document.getElementById('add');
+	var count=aLi.length;
+	btn.onclick=function(){
+		var newLi=document.createElement('li');
+		newLi.innerText="item"+ ++count;
+		oUl.appendChild(newLi);
+	}
+	oUl.onclick=function(ev){
+		var ev = ev||window.event;
+		var target=ev.target||ev.srcElement;
+		if (target.nodeName.toLowerCase()=='li') {
+			console.log(target.innerText);
+		}
+	}
+}
+</script>
+</html>

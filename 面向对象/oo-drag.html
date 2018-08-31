@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>drag</title>
+	<style type="text/css">
+	body{
+		height: 10000px;
+	}
+    	#box1,#box2 {
+        position: fixed;
+    }
+	</style>
+</head>
+<body>
+	<div id="box1" style="background: red;width: 200px;height: 200px;"></div>
+    <div id="box2" style="background: blue;width: 100px;height: 300px;"></div>
+</body>
+<script type="text/javascript">
+	function drag(id){
+		this.oBox=document.getElementById(id);
+		this.disX=0;
+		this.disY=0;
+		var _this=this;
+		this.oBox.onmousedown=function(){
+			_this.fnDown();
+		}
+	}
+	drag.prototype.fnDown=function(ev){
+		var oEvent=ev||event;
+		this.disX=oEvent.clientX-this.oBox.offsetLeft;
+		this.disY=oEvent.clientY-this.oBox.offsetTop;
+		var _this=this;
+		document.onmousemove=function(){
+			_this.fnMove();
+		};
+		document.onmouseup=function(){
+			_this.fnUp();
+		}
+	}
+	drag.prototype.fnMove=function(ev){
+		var oEvent=ev||event;
+
+		this.oBox.style.left=oEvent.clientX-this.disX+"px";
+		this.oBox.style.top=oEvent.clientY-this.disY+"px";
+	}
+	drag.prototype.fnUp=function(){
+		document.onmousemove=null;
+		document.onmouseup=null;
+	}
+	window.onload=function(){
+		var drag1=new drag("box1");
+		var drag2=new drag("box2");
+	}
+</script>
+</html>

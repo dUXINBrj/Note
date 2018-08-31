@@ -1,0 +1,24 @@
+$fontSize:12px;
+$colorGrey:#f2f2f2;
+body{
+	font-size:$fontSize;
+	background:$colorGrey;
+	p{
+		text-align: center;
+		font:{
+			size:5em;
+			weight:bold;
+			family:"YaHei"
+		}
+	}
+}
+.mydiv{
+	 :hover{
+	 	background: red;
+	 }
+	 &-son{
+	 	width: 10px;
+	 	height: 10px;
+	 	background: blue;
+	 }
+}

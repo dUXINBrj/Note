@@ -1,0 +1,55 @@
+向function内传参 参数太多时 使用object进行传参
+// ************************************************
+function displayInfo(argument) {
+	var output="";
+	if(typeof argument.name=="string"){
+		output+="name:"+argument.name+'\n';
+	}
+	if (typeof argument.age=="number") {
+		output+="Age:"+argument.age+'\n';
+	}
+	alert(output);
+}
+displayInfo({
+	name:"Du",
+	age:24
+});
+// ************************************************
+
+
+try{}catch(){}
+// ************************************************
+btn.onclick=function (argument) {
+    try{
+        alet("1");
+    // alert语法错误，跳至catch
+    }
+    catch(err){
+        alert("错误");
+    }
+}
+// ************************************************
+
+function内传参不仅可以传递参数 还可以传递函数
+// ************************************************
+function callSomeFunction(someFUnction,argument){
+	return someFUnction(argument);
+}
+function add10(num){
+	return num+10;
+}
+var res=callSomeFunction(add10,10);
+alert(res);    //20
+// ************************************************
+
+function arguments的callee属性
+// ************************************************
+function factorial(num) {
+	if (num<=1) {
+		return 1;
+	}else{
+		return num*arguments.callee(num-1);
+		// arguments.callee等同与factorial(num-1),但是消除了factorial(num-1)这种写法紧密耦合现象
+	}
+}
+// ************************************************

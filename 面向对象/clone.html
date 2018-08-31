@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>clone</title>
+</head>
+<body>
+	
+</body>
+<script type="text/javascript">
+// 浅拷贝 更改子类属性 父类也会做相应修改
+function extendClone(p){
+	var c={};
+	for (var i in p){
+		c[i]=p[i];
+	}
+	c.uber=p;
+	return c;
+}
+var old=new Object;
+old.name="duxin";
+old.age="23";
+old.birthPlace=["毕节","贵阳"];
+var now = extendClone(old);
+now.birthPlace.push("上海");
+// 深拷贝
+function deepClone(arr,obj){
+	var obj=obj||{};
+	for( var i in p){
+		if (typeof p[i]==='object') {
+
+		}
+	}
+}
+</script>
+</html>

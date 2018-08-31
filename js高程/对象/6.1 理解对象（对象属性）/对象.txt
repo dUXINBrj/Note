@@ -1,0 +1,69 @@
+一、对象的数据属性
+
+configurable：能否通过delete删除属性从而重新定义属性，能否修改属性的特性，默认为true（修改为false之后不能再变为true，修改除writa外的属性都会被忽视）；
+enumerable: 能否通过for-in循环返回属性，默认true；
+writable：能否修改属性的值，默认为true；
+value：属性的数据值。
+
+修改属性的默认值 => 
+Obiect.defineProperty(对象，属性，修改的属性及值);
+调用该方法时如果不指定，configurable、enumerable、writable默认都是false；
+
+
+二、对象的访问器属性
+
+var book = {
+    _year: 2018,
+    ver: 1
+}
+Object.defineProperty(book, 'year', {
+    get:function() {
+        return this._year;
+    },
+    set:function(newValue) {
+        if (newValue > 2018) {
+            this._year = newValue;
+            this.ver += newValue - 2018;
+        }
+    }
+});
+
+year就是book的访问器属性，在修改其值的同时可能会同时修改其他属性；
+访问器属性只能设置get/set属性，不能设置value属性；
+可以不用同时指定getter和setter，不指定setter则属性不能写，不指定getter则不能读；
+
+
+Object.defineProperties()可一次定义多个属性；
+上面的book对象也可以用以下方法定义；
+var book = {};
+Object.defineProperties(book, {
+	_year: {
+        value: 2018,
+        writable: true
+	},
+	ver: {
+        value: 1,
+        writable: true
+	},
+	year: {
+		get:function() {
+	        return this._year;
+	    },
+	    set:function(newValue) {
+	        if (newValue > 2018) {
+	            this._year = newValue;
+	            this.ver += newValue - 2018;
+	        }
+	    }
+	}
+});
+
+
+P.S: 注意！！！很坑的地方！！！
+js高程这本书里面并没有说通过Object.defineProperties()方法创建出来的属性其configurable/enumerable/writable默认值都是false。
+因此书中6.1.2那个例子敲出来是没效果的，需要手动修改writable属性为true。（如上面的例子）
+
+通过Object.getOwnPropertyDescriptors(对象)可获取到该对象的所有属性的特性；
+通过bject.getOwnPropertyDescriptors(对象, 属性名)可获取到该对象指定属性的特性；
+
+

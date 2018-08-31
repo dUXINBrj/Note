@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>对象的访问器属性</title>
+</head>
+<body>
+    
+</body>
+<script>
+'use strict'
+// 通过Object.defineProperties()一次为对象创建多个属性
+var book = {};
+Object.defineProperties(book, {
+	_year: {
+        value: 2018,
+        writable: true // 通过Object.defineProperties()方法创建的属性默认是false
+	},
+	ver: {
+        value: 1,
+        writable: true
+	},
+	year: {
+		get:function() {
+	        return this._year;
+	    },
+	    set:function(newValue) {
+	        if (newValue > 2018) {
+	            this._year = newValue;
+	            this.ver += newValue - 2018;
+	        }
+	    }
+	}
+});
+// 读取对象所有的属性特性
+var attr = Object.getOwnPropertyDescriptors(book);
+
+// 通过Object.defineProperty()方法创建
+var book2 = {
+    _year: 2018,
+    ver: 1
+}
+Object.defineProperty(book2, 'year', {
+    get:function() {
+        return this._year;
+    },
+    set:function(newValue) {
+        if (newValue > 2018) {
+            this._year = newValue;
+            this.ver += newValue - 2018;
+        }
+    }
+});
+// 读取对象指定属性的特性
+var attr2 = Object.getOwnPropertyDescriptors(book2, 'year');
+</script>
+</html>

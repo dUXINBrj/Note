@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>oo-test</title>
+	<script src="jquery-2.1.4.js"></script>
+	<style>
+		.modal{width: 200px;height: 150px;border: 1px solid #dadada;border-radius: 7px;box-shadow:  10px 10px 5px #888888;
+				position: fixed;bottom: 0;top: 0;left: 0;right: 0;margin: auto;display: none;
+		}
+		.modal p{text-align: center;}
+		.modal .content{font-size: 20px;}
+	</style>
+</head>
+<body>
+<div class="modal">
+	<p class="title">Title</p>
+	<p class="content">Are U Sure?</p>
+	<p class="btn"><button class="btnConfirm">确认</button><button class="btnCancel">取消</button></p>
+</div>
+<button class="aa">aaaa</button>
+</body>
+<script>
+function modal(parents,title,content){
+	this.parents=parents;
+	this.title=title;
+	this.contenet=content;
+	
+	this.initElements();
+	this.initEvent();
+}
+modal.prototype={
+	constructor:modal,
+	initElements:function(){
+		this.modalEle=$("<div class='modal'></div>");
+		this.title=$("<p class='title'></p>");
+		this.title.val(this.title);
+		this.contenet=$("<p class='content'></p>");
+		this.contenet.val(this.contenet);
+		this.btn=$("<p class='btn'></p>");
+		this.btnConfirm=$("<button class='btnCnfirm'>确认</button>");
+		this.btnCancel=$("<button class='btnCancel'>取消</button>");
+		this.btn.append(this.btnConfirm).append(this.btnCancel);
+		
+		this.modalEle.append(this.title).append(this.contenet).append(this.btn);
+	},
+	initEvent:function(){
+		var that = this;
+		this.parents.on("click",function(){
+			that.modalShow();
+		});
+		this.btnConfirm.on("click",function(){
+			that.modalHide();
+		});
+		this.btnCancel.on("click",function(){
+			that.modalHide();
+		});
+	},
+	modalShow:function(){
+		this.modalEle.css("display","block");
+	},
+	modalHide:function(){
+		this.modalEle.css("display","none");
+	},
+}
+new modal($(".aa"),"Tips","Are U Sure?");
+</script>
+</html>

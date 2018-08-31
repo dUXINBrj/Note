@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>call apply</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+function sum(num1,num2) {
+	return num1+num2;
+}
+// apply 第二个参数传入的为一个数组
+function callSum1(num1,num2){
+	return sum.apply(this,[num1,num2]);
+}
+function callSum2(){
+	console.log(arguments);
+	return sum.apply(this,arguments);
+}
+// call 必须明确的传入每一个参数
+function callSum3(num1,num2){
+	return sum.call(this,num1,num2);
+}
+
+// call和apply真正的作用在于扩充函数的作用域
+window.color="red";
+var o={color:"blue"};
+function sayColor(){
+	alert(this.color);
+}
+sayColor.call(this);
+sayColor.call(window);
+// 改变sayColor这一函数的作用域在o中，则this指向了o以此实现对象与方法不需要任何耦合
+sayColor.call(o);
+
+// bind() 使用 创建新的objectSayColor方法 改变其this指向由window改为o
+var objectSayColor=sayColor.bind(o);
+objectSayColor();
+</script>
+</html>
