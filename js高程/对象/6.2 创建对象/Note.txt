@@ -19,3 +19,32 @@
     原因在于方法也是对象，在实例化方法时等同于执行了 new Function();
 
     可通过原型模式解决该缺点；
+
+原型链模式
+
+    理解原型链：
+        function Person() {
+            Person.prototype.name = "Xin";
+            Person.prototype.age = "24";
+            Person.prototype.sayName = function() {
+                alert(this.name);
+            }
+        }
+        var person1 = new Person();
+        person1.name = "Other";
+        alert(person1.name); // "Other"
+        var person2 = new Person();
+        alert(person2.name); // "Xin"
+
+        如上例所示，person1和person2通过原型链都继承了Person的属性；
+        person1在修改了name属性后获得了自身的name属性，而person1和Person并不会受影响。
+        这是因为，代码读取对象的某个属性时会优先从其自身属性中寻找目标属性，如果找不到则通过原型链向上寻找。
+        当对象实例修改的属性与原型中继承的属性值相同时，会自身新建一个属性，代码首先从对象实例中找到了匹配的属性，便不会继续从原型中去找。
+        也就是对象自身的属性会屏蔽掉原型链中的同名属性。
+        通过hasOwnProperty()方法，我们可以知道改属性是对象实例自身的属性还是继承至原型链的属性，如：
+        person1.hasOwnProperty('name'); // true 来自实例
+        person2.hasOwnProperty('name'); // false 来自原型
+        通过delete操作符我们可以删除实例自身的属性，这时候再次使用该属性时则会返回原型链中该属性的值，如：
+        delete person1.name;
+        alert(person1.name); // "Xin"
+
