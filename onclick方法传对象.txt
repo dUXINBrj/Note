@@ -1,0 +1,9 @@
+var user = {id:1, name:'zs', age:20};
+
+var ele = '<a onclick="edit(' + JSON.stringify(user).replace(/"/g, '&quot;') + ');">修改</a>';
+
+或者 
+
+var ele = '<a onclick="edit(\'' + JSON.stringify(user).replace(/"/g, '&quot;') + '\');">修改</a>';
+
+前者取到的是json对象，后者取到的是json字符串。
